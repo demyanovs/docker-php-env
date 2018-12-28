@@ -54,8 +54,10 @@ ALTER USER 'default'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';
 
 To connect to Mysql container find container id by running 
 ```
-docker container ls and run
+docker container ls
 ``` 
+and run
+
 Connect to the container
 ```
 docker exec -it CONTAINER_ID /bin/bash 
