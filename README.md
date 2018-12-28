@@ -52,8 +52,7 @@ ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';
 ALTER USER 'default'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';
 ```
 
-###To connect to Mysql container
-Find container id by running 
+To connect to Mysql container find container id by running 
 ```
 docker container ls and run
 ``` 
