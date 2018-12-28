@@ -1,0 +1,42 @@
+version: '2'
+# Our services (containers)
+services:
+    nginx:
+        image: nginx:latest
+        # Route ports
+        ports:
+            - "8080:80"
+            - "1443:443"
+        # Mount directoris - host_dir:container_dir
+        volumes:
+            - ./nginx:/etc/nginx/conf.d
+            - ./www:/var/www
+            - ./logs:/var/log/nginx
+        # Nginx need to communicate with php container
+        links:
+            - php
+    php:
+        # Build PHP image
+        build: ./images/php
+        # PHP need to communicate with mysql
+        links:
+            - mysql
+        # Mount dir with our code
+        volumes:
+            - ./www:/var/www
+    mysql:
+        image: mysql:8
+        ports:
+            - "13306:3306"
+        # Mount dir to keep mysql data
+        volumes:
+            - ./mysql:/var/lib/mysql
+        # Set root password for Mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+    redis:
+        image: redis:alpine
+        volumes:
+            - ./redis:/data
+        links:
+            - php
