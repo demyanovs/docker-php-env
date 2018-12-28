@@ -13,11 +13,11 @@ We'll follow important docker rule - one service per container.  Also, we'll mou
 
 
 ## Folders structure
-www - projects files
-mysql - mysql data
-logs - different logs
-nginx -  nginx conf files
-images - docker images
+* www - projects files
+* mysql - mysql data
+* logs - different logs
+* nginx -  nginx conf files
+* images - docker images
 
 ## Execute
 Just run
