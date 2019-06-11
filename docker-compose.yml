@@ -2,41 +2,44 @@ version: '2'
 # Our services (containers)
 services:
     nginx:
+        hostname: docker-nginx
+        container_name: docker-nginx
         image: nginx:latest
-        # Route ports
         ports:
             - "8080:80"
             - "1443:443"
-        # Mount directoris - host_dir:container_dir
+        # Mount directories - host_dir:container_dir
         volumes:
-            - ./nginx:/etc/nginx/conf.d
+            - ./containers/nginx:/etc/nginx/conf.d
             - ./www:/var/www
             - ./logs:/var/log/nginx
-        # Nginx need to communicate with php container
         links:
             - php
     php:
-        # Build PHP image
-        build: ./images/php
-        # PHP need to communicate with mysql
+        hostname: docker-php
+        container_name: docker-php
+        build: ./containers/php
+        working_dir: /var/www/hello.dev
         links:
             - mysql
-        # Mount dir with our code
+            - redis
         volumes:
             - ./www:/var/www
+            - ./containers/php/my.ini:/usr/local/etc/php/conf.d/my.ini
     mysql:
+        hostname: docker-mysql
+        container_name: docker-mysql
         image: mysql:8
         ports:
             - "13306:3306"
-        # Mount dir to keep mysql data
         volumes:
-            - ./mysql:/var/lib/mysql
-        # Set root password for Mysql
+            - ./containers/mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: secret
+            MYSQL_DATABASE: hellodb
     redis:
+        hostname: docker-redis
+        container_name: docker-redis
         image: redis:alpine
         volumes:
-            - ./redis:/data
-        links:
-            - php
+            - ./containers/redis:/data

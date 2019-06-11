@@ -10,14 +10,15 @@ Local docker environment for PHP development with components:
 ## Features
 We'll follow important docker rule - one service per container.  Also, we'll mount docker volumes to keep code and data on our host machine and use it in containers, so our containers will work for "read-only" purpose and can be stopped, deleted or replaced without losing data.
 
-
-
 ## Folders structure
-* www - projects files
-* mysql - mysql data
-* logs - different logs
-* nginx -  nginx conf files
-* images - docker images
+    .
+    ├── containers         # Docker containers
+    │   ├── mysql
+    │   ├── nginx
+    │   ├── php
+    |   └── redis
+    ├── logs               # Different logs 
+    └── www                # Project files
 
 ## Execute
 Just run
@@ -45,22 +46,22 @@ In new versions of PHP and MySQL you may see an error:
 SQLSTATE[HY000] [2002] Connection refused
 ```
 
-Just connect to a MySQL container and run commands:
+Just connect to a MySQL container 
+
+```
+docker exec -it docker-php /bin/bash 
+```
+
+Then connect to mysql from command line  
+
+```
+mysql -uroot -psecret hellodb
+```
+
+And run commands:
+
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'secret';
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';
 ALTER USER 'default'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';
-```
-
-To connect to Mysql container find container id by running 
-```
-docker container ls
-``` 
-Connect to the container
-```
-docker exec -it CONTAINER_ID /bin/bash 
-```
-Then connect to mysql from command line  
-```
-mysql -uroot -p.
 ```
