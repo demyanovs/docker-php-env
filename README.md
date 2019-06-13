@@ -49,7 +49,7 @@ SQLSTATE[HY000] [2002] Connection refused
 Just connect to a MySQL container 
 
 ```
-docker exec -it docker-php /bin/bash 
+docker exec -it docker-php bash 
 ```
 
 Then connect to mysql from command line  
