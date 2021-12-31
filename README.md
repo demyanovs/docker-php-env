@@ -29,13 +29,13 @@ docker-compose up -d
 ## Test build
 Open the browser and go to localhost:8080. You'll see:
 <p align="center">
-  <img width="400" height="363" src="https://codingwar.com/sites/default/files/images/docker_phpinfo.png">
+  <img width="400" height="363" src="https://demyanov.dev/sites/default/files/images/docker_phpinfo.png">
 </p>
 
 Check MySQL connection, run localhost:8080/db.php
 
 <p align="center">
-  <img src="https://codingwar.com/sites/default/files/images/docker_mysql.png">
+  <img src="https://demyanov.dev/sites/default/files/images/docker_mysql.png">
 </p>
 
 
